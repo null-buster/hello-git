@@ -1,5 +1,7 @@
 # hello-git
 #code for multi-class labelling
+
+
 from warnings import warn
 
 import numpy as np
@@ -58,3 +60,12 @@ def multilabel_sample(y, size=1000, min_count=5, seed=None):
                                    replace=False)
 
     return np.concatenate([sample_idxs, remaining_sampled])
+    
+    def multilabel_sample_dataframe(df, labels, size, min_count=5, seed=None):
+    """ Takes a dataframe `df` and returns a sample of size `size` where all
+        classes in the binary matrix `labels` are represented at
+        least `min_count` times.
+    """
+    idxs = multilabel_sample(labels, size=size, min_count=min_count, seed=seed)
+    return df.loc[idxs]
+    
